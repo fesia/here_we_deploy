@@ -16,7 +16,7 @@ In addition, the requirements below you will need on the host that executes kick
 - docker (python module)
 - git
 
-**NOTE:** The playbooks are configured and tested on CentOS system. The (yum)[https://docs.ansible.com/ansible/latest/modules/yum_module.html] module and probably some others used in the playbooks, won't work on Debian-like and not RPM-based systems.
+**NOTE:** The playbooks are configured and tested on CentOS system. The [yum](https://docs.ansible.com/ansible/latest/modules/yum_module.html) module and probably some others used in the playbooks, won't work on Debian-like and not RPM-based systems.
 
 ### Installing
 
@@ -124,7 +124,7 @@ You will see the app's content (by what the app version is being displayed) ever
 ### How does it work?
 From your workstation the application is available through the VirtualBox' NAT network: every request is proxied through 10080 host's port to the 80's on the VM.
 
-We got rid of any downtime while deploying the new version of our application by using the 'parallelism' option. Once we built the new 'mega_app' image, the tag is applied to it automatically by Ansible (docker_image)[https://docs.ansible.com/ansible/latest/modules/docker_image_module.html] module. The updated docker-compose.yml file contains the new app tag as well. While deploying the new app version Docker (on Ansible's request) replaces old 'mega_app' containers with the new ones by batches of 4 one-by-one (here we have 'parallelism' set to 4 by default) **not** killing the whole set of the old containers before the new installation.
+We got rid of any downtime while deploying the new version of our application by using the 'parallelism' option. Once we built the new 'mega_app' image, the tag is applied to it automatically by Ansible [docker_image](https://docs.ansible.com/ansible/latest/modules/docker_image_module.html) module. The updated docker-compose.yml file contains the new app tag as well. While deploying the new app version Docker (on Ansible's request) replaces old 'mega_app' containers with the new ones by batches of 4 one-by-one (here we have 'parallelism' set to 4 by default) **not** killing the whole set of the old containers before the new installation.
 
 While the deployment process user(s) might sometimes get the old app's code and (probably) feel some degraded performance but the application will **never** become totally unreachable to them.
 
