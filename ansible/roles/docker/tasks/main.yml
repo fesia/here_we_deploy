@@ -1,0 +1,19 @@
+---
+
+- name: Installing packages
+  include_tasks: install_docker.yml
+
+- name: Starting Docker daemon
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Pulling images
+  docker_image:
+    name: "{{ item }}"
+  when: pull_images in ['y', 'yes', 'true']
+  with_items:
+    - "{{ docker_images }}"
+
+...

@@ -1,0 +1,23 @@
+---
+
+- name: Generating docker_compose.yml
+  template:
+    src: docker_compose.yml
+    dest: "{{ workdir_path }}/docker-compose.yml"
+    mode: 0644
+
+## Uncomment in Ansible version 2.8
+#- name: Include compose vars
+#  include_vars:
+#    file: docker_compose_content.yml
+
+- name: Running Docker stack deployment
+  shell: "docker stack deploy --compose-file={{ workdir_path }}/docker-compose.yml {{ env }}"
+## docker_stack module will be introduced in Ansible 2.8
+## using shell module instead for now
+#  docker_stack:
+#    name: prod
+#    state: present
+#    compose: "{{ compose_content }}"
+  
+...

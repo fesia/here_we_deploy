@@ -1,0 +1,14 @@
+---
+
+- name: Inspecting Docker Swarm
+  docker_swarm:
+    state: inspect
+  register: swarm_info
+
+- name: Initializing Docker Swarm
+  docker_swarm:
+    state: present
+    advertise_addr: "{{ swarm_ip }}"
+  when: swarm_info['swarm_facts'] is undefined
+
+...

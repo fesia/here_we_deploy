@@ -1,0 +1,19 @@
+---
+
+- name: Installing Docker dependencies
+  yum:
+    name: "{{ docker_deps }}"
+    state: latest
+
+- name: Enabling Docker repository
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+    mode: 0644
+
+- name: Installing Docker CE package
+  yum:
+    name: docker-ce
+    state: latest
+
+...

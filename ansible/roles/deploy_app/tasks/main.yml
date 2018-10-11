@@ -1,0 +1,35 @@
+---
+
+- name: Checking out the app version to deploy
+  git:
+    repo: "{{ test_app_repo_url }}"
+    dest: "{{ git_repo_path }}"
+    accept_hostkey: yes
+    version: "{{ release_version }}"
+
+- name: Adding Dockerfile
+  template:
+    src: Dockerfile
+    dest: "{{ git_repo_path }}/Dockerfile"
+    mode: 0644
+
+- name: Building app version "{{ release_version }}"
+  docker_image:
+    name: "{{ app_img }}"
+    path: "{{ git_repo_path }}"
+    tag: "{{ release_version }}"
+
+- name: Making sure Docker Swarm is initialized
+  include_tasks: swarm_init.yml
+
+- name: Deploying Docker stack
+  include_tasks: deploy_docker_stack.yml
+
+- name: Checking app's deployment progress
+  shell: "docker service ps -f='desired-state=running' --format='{{ '{{' }} .Image {{ '}}' }}' {{ env }}_{{ nginx_service }}"
+  register: up_progress
+  until: up_progress['stdout'] | string | regex_findall(app_img_newest) | length == replicas_quantity
+  retries: 30
+  delay: 3
+
+...

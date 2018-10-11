@@ -1,0 +1,22 @@
+---
+
+haproxy_img: dockercloud/haproxy
+nginx_img: afesenko/nginx_8080
+
+app_img: mega_app
+app_img_newest: "{{ app_img }}:{{ release_version }}"
+nginx_service: mega_app_www
+
+html_content_inner_path: /usr/share/nginx/html
+www_port: 8080
+swarm_ip: 127.0.0.1
+replicas_quantity: 12
+parallelism_rate: 4
+
+app_author: fesia
+git_repo_name: test_app
+test_app_repo_url: "https://github.com/{{ app_author }}/{{ git_repo_name }}.git"
+workdir_path: "/tmp/.workdir_{{ app_img }}"
+git_repo_path: "{{ workdir_path }}/{{ git_repo_name }}"
+
+...

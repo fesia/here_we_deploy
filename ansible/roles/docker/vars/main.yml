@@ -1,0 +1,12 @@
+---
+
+docker_deps:
+  - yum-utils
+  - device-mapper-persistent-data
+  - lvm2
+
+docker_images:
+  - dockercloud/haproxy
+  - afesenko/nginx_8080 
+
+...
