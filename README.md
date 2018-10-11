@@ -128,6 +128,17 @@ We got rid of any downtime while deploying the new version of our application by
 
 While the deployment process user(s) might sometimes get the old app's code and (probably) feel some degraded performance but the application will **never** become totally unreachable to them.
 
+## What is next?
+As we have been convinced the described solution works, let's imagine that something more complex needs to be deployed to some production environment. I've come up with a few things that can make it possible satisfying today's business and technical needs.
+
+1. No Vagrant in production :). Single node architecture won't work as well. It sounds like an obvious thing but it is better to mention explicitly.
+2. CI/CD tool like [Jenkins](https://jenkins.io/) would provide us with some profit giving us much higher level of flexibility and configurability while preparing and performing deployments.
+3. Depending on every uniqe case it might be reasonable to use [Kubernetes](https://kubernetes.io/) instead of Docker Swarm.
+4. Applying some monitoring, metric gathering and log analysis systems is a must. Tools like [Riemann](http://riemann.io/), [Prometheus](https://prometheus.io/) and [ELK](https://www.elastic.co/elk-stack) can be useful in this matter.
+5. Best practies in scalability raise the need to have production environment where computing capacity can be easily extended. The most suitable solution is any of available cloud platforms: [AWS](https://aws.amazon.com/), [Google Cloud](https://cloud.google.com/), [DigitalOcean](https://www.digitalocean.com/) etc. Unless you're lucky owner of some [datacenter](http://www.jllproperty.us/en-us/commercial-real-estate/flex-properties/data-center-properties#vt=Browse) ;).
+6. Some Ansible gurus might note that my 'deploy_app' role isn't perfect and can be optimized. Well, they'd be right. It relates not only to playbooks but to templates and overall structure as well. Would be nice to refactor 'deploy_app' partially.
+
+Sure thing, the list above can be extended taking into the consideration specific business case. Please feel free to reach out to me with any kind of comments/suggestions on this regard.
 
 ## Authors
 **Andrii Fesenko** - *Initial work* - <andrii.iv.fesenko@gmail.com>
