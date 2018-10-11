@@ -29,7 +29,7 @@ In addition, the requirements below you will need on the host that executes kick
 ```
 > vagrant ssh
 $ cd ./here_we_deploy
-$ sudo ansible-playbook ansible-playbook ./ansible/plays/release_new_app_version.yml -e 'release_version=v0.1'
+$ sudo ansible-playbook ./ansible/plays/release_new_app_version.yml -e 'release_version=v0.1'
 ```
 
 **NOTE:** 'v0.1' version is actually a tag at [test_app](https://github.com/fesia/test_app/tags) repo.
