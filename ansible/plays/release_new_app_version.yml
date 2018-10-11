@@ -7,4 +7,10 @@
   roles:
     - { role: deploy_app }
 
+  post_tasks:
+  - name: Cleaning up the workdir
+    file:
+      path: "{{ workdir_path }}"
+      state: absent
+
 ...
